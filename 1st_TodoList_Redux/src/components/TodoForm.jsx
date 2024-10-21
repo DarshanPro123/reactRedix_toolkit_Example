@@ -26,10 +26,10 @@ const TodoForm = ({ task, setTask }) => {
           title: data.todo,
         })
       );
+      setTask({});
     } else {
       dispatch(addTodo(data.todo));
     }
-    console.log(data);
     reset({ id: "", todo: "" });
   };
 
