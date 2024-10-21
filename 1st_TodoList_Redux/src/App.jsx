@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="w-10/12 md:w-1/2 lg:w-1/3 h-auto p-10 mt-10 text-stone-900 text-center mx-auto bg-gray-50 rounded-lg shadow-lg">
-      <h1 className="text-center text-orange-500 text-xl">Todo List</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">Todo List ★</h1>
       <TodoForm task={task} setTask={setTask} />
       <div className="mt-5">
         {todos.map((todo) => (

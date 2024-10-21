@@ -47,7 +47,7 @@ const TodoForm = ({ task, setTask }) => {
       <input
         type="submit"
         value={task.id ? "Update" : "Add"}
-        className="border border-gray-700 bg-orange-400 hover:bg-orange-700 cursor-pointer text-gray-50 px-4 py-2 "
+        className="border border-gray-700 bg-gray-600 hover:bg-gray-800 cursor-pointer text-gray-50 px-4 py-2 "
       />
     </form>
   );
