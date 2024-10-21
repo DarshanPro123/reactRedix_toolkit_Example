@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import TodoForm from "./components/TodoForm";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "../src/app/todoSlice";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
+  console.log(todos);
+  const [task, setTask] = useState("");
+
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
+  const handleUpdate = (id, title) => {
+    setTask({ id, title });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="w-10/12 md:w-1/2 lg:w-1/3 h-auto p-10 mt-10 text-stone-900 text-center mx-auto bg-gray-50 rounded-lg shadow-lg">
+      <h1 className="text-center text-orange-500 text-xl">Todo List</h1>
+      <TodoForm task={task} />
+      <div className="mt-5">
+        {todos.map((todo) => (
+          <div
+            key={todo.id}
+            className="flex justify-between items-center border-b border-gray-300 py-2"
+          >
+            <p>{todo.title}</p>
+            <div className="flex gap-3">
+              <button
+                className="text-red-500"
+                onClick={() => handleDelete(todo.id)}
+              >
+                Delete
+              </button>
+              <button
+                className="text-blue-500"
+                onClick={() => handleUpdate(todo.id, todo.title)}
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
