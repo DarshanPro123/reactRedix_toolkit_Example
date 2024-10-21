@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTodo } from "../src/app/todoSlice";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ function App() {
     );
     if (confirm) {
       dispatch(deleteTodo(id));
+      toast.error("deleted successfully");
     }
   };
 
@@ -51,6 +54,14 @@ function App() {
           </div>
         ))}
       </div>
+      <ToastContainer
+        position="bottom-right"
+        pauseOnHover={false}
+        autoClose={2000}
+        hideProgressBar={true}
+        theme="colored"
+        transition={Slide}
+      />
     </div>
   );
 }

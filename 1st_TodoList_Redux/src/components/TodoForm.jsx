@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { addTodo, updateTodo } from "../app/todoSlice";
 
 const TodoForm = ({ task, setTask }) => {
@@ -26,9 +27,11 @@ const TodoForm = ({ task, setTask }) => {
           title: data.todo,
         })
       );
+      toast.info("Task updated successfully");
       setTask({});
     } else {
       dispatch(addTodo(data.todo));
+      toast.success("Task added successfully");
     }
     reset({ id: "", todo: "" });
   };
