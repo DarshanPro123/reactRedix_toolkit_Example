@@ -136,7 +136,7 @@ function App() {
 
       {/* Display All Submitted Data */}
       <div className="mt-8 w-11/12 md:w-6/12 p-4 bg-gray-800 rounded-lg shadow-lg">
-        <h2 className="text-xl text-center mb-4">Submitted Data</h2>
+        <h2 className="text-xl text-center mb-4">User Data</h2>
         {entries.length > 0 ? (
           entries.map((entry, index) => (
             <div
