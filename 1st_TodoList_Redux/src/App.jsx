@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
-  console.log(todos);
   const [task, setTask] = useState("");
 
   const handleDelete = (id) => {
@@ -39,27 +38,27 @@ function App() {
             <p>{todo.title}</p>
             <div className="flex gap-3">
               <button
-                className="text-red-500"
-                onClick={() => handleDelete(todo.id)}
-              >
-                Delete
-              </button>
-              <button
                 className="text-blue-500"
                 onClick={() => handleUpdate(todo.id, todo.title)}
               >
                 Edit
+              </button>
+              <button
+                className="text-red-500"
+                onClick={() => handleDelete(todo.id)}
+              >
+                Delete
               </button>
             </div>
           </div>
         ))}
       </div>
       <ToastContainer
-        position="bottom-right"
-        pauseOnHover={false}
+        position="top-right"
+        pauseOnHover={true}
         autoClose={2000}
-        hideProgressBar={true}
-        theme="colored"
+        hideProgressBar={false}
+        theme="dark"
         transition={Slide}
       />
     </div>
@@ -67,3 +66,6 @@ function App() {
 }
 
 export default App;
+
+// const handleToggle = () => {};
+// /* <input type="checkbox" onClick={handleToggle} /> */

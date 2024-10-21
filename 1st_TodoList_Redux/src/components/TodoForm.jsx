@@ -37,9 +37,9 @@ const TodoForm = ({ task, setTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleData)}>
+    <form onSubmit={handleSubmit(handleData)} className="space-x-3">
       <input
-        className="w-10/12 md:w-1/2 lg:w-1/2 h-10 mt-5 px-4 py-2 border border-gray-300 "
+        className="w-10/12 md:w-1/2 lg:w-1/2 h-10 mt-5 px-4 py-2 border rounded-md border-gray-300 "
         type="text"
         placeholder="Add a todo..."
         {...register("todo", { required: true })}
@@ -50,7 +50,7 @@ const TodoForm = ({ task, setTask }) => {
       <input
         type="submit"
         value={task.id ? "Update" : "Add"}
-        className="border border-gray-700 bg-gray-600 hover:bg-gray-800 cursor-pointer text-gray-50 px-4 py-2 "
+        className="border border-gray-700 bg-gray-600 h-10 hover:bg-gray-800 cursor-pointer rounded-md text-gray-50 px-4 py-2 "
       />
     </form>
   );
