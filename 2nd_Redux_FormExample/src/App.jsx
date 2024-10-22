@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { setFormData, selectEntries } from "./apps/store";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function App() {
   const {
@@ -41,15 +42,14 @@ function App() {
       birthDate: null,
       gender: "",
     });
-
+    setShowPassword(false);
     setDate(null);
   };
-
   return (
     <div className="flex flex-col items-center  text-gray-50">
       <form
         onSubmit={handleSubmit(handleData)}
-        className="flex w-11/12 md:w-6/12 gap-8 flex-col   p-6  rounded-lg "
+        className="flex w-11/12 md:w-6/12 min-[340px]:p-3,text-center gap-8 flex-col  shadow-xl p-10 rounded-lg "
       >
         <h1 className="text-4xl font-bold text-blue-900 text-center mb-4">
           User Registration Form
@@ -60,7 +60,7 @@ function App() {
         <input
           {...register("name", { required: "Name is required" })}
           type="text"
-          placeholder="Name"
+          placeholder="Enter Name"
           className={`p-2 h-14 bg-gray-700 rounded-lg ${
             errors.name ? "border border-red-500" : ""
           }`}
@@ -74,7 +74,7 @@ function App() {
         <input
           {...register("email", { required: "Email is required" })}
           type="email"
-          placeholder="Email"
+          placeholder="Enter Email"
           className={`p-2 h-14 bg-gray-700 rounded-lg ${
             errors.email ? "border border-red-500" : ""
           }`}
@@ -95,17 +95,17 @@ function App() {
             {...register("password", { required: "Password is required" })}
             type={showPassword ? "text" : "password"}
             id="password-field"
-            placeholder="Password"
+            placeholder="Enter Password"
             className={`p-2 h-14 bg-gray-700 w-5/6 rounded-lg ${
               errors.password ? "border border-red-500" : ""
             }`}
           />
           <span
             toggle="#password-field"
-            className="field-icon text-xl cursor-pointer"
+            className="field-icon text-3xl text-gray-800 cursor-pointer"
             onClick={handleShowPassword}
           >
-            {showPassword ? "🙈" : "👁️"}
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
         {errors.password && (
@@ -133,24 +133,24 @@ function App() {
         <label className="text-gray-800 text-xl" htmlFor="">
           Gendar:
         </label>
-        <div className="flex h-14 gap-4 bg-gray-700 p-2 rounded-lg w-full">
-          <label htmlFor="field-male" className="flex items-center">
+        <div className="flex h-14 gap-6 bg-gray-700 p-2 rounded-lg w-full">
+          <label htmlFor="field-male" className="flex text-xl items-center">
             <input
               {...register("gender", { required: "Gender is required" })}
               type="radio"
               value="male"
               id="field-male"
-              className="mr-1"
+              className="mr-3"
             />
             Male
           </label>
-          <label htmlFor="field-female" className="flex items-center">
+          <label htmlFor="field-female" className="flex text-xl items-center">
             <input
               {...register("gender")}
               type="radio"
               value="female"
               id="field-female"
-              className="mr-1"
+              className="mr-3"
             />
             Female
           </label>
@@ -161,12 +161,12 @@ function App() {
         <input
           type="submit"
           value="Submit"
-          className="border h-14 border-gray-700 bg-orange-400 hover:bg-orange-700 cursor-pointer text-gray-50 px-4 py-2 rounded transition duration-200"
+          className="w-full border h-14 border-gray-700 bg-orange-400 hover:bg-orange-700 cursor-pointer text-gray-50 px-4 py-2 rounded-xl transition duration-200"
         />
       </form>
 
       {/* Display All Submitted Data */}
-      <div className="mt-8 w-11/12 md:w-6/12 p-4 bg-gray-800 rounded-lg shadow-lg">
+      <div className="mt-10 w-11/12 md:w-6/12 p-4 bg-gray-800 rounded-lg shadow-lg">
         <h2 className="text-xl text-center mb-4">User Data</h2>
         {entries.length > 0 ? (
           entries.map((entry, index) => (

@@ -1,9 +1,12 @@
 // store.js
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+const data = localStorage.getItem("formData");
+const entries = data ? JSON.parse(data) : [];
+
 // Initial state for the form slice
 const initialState = {
-  entries: [],
+  entries: entries,
 };
 
 // Create the form slice
@@ -14,6 +17,7 @@ const formSlice = createSlice({
     // Action to add form data to the entries array
     setFormData: (state, action) => {
       state.entries.push(action.payload); // Append new entry
+      localStorage.setItem("formData", JSON.stringify(state.entries)); // Save to local storage
     },
   },
 });
