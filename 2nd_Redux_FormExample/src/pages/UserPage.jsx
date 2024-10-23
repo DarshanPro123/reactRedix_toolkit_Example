@@ -19,10 +19,13 @@ const UserPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 p-5">
+    <div className="min-h-screen bg-gray-100 relative text-gray-800 p-5">
       <h1 className="text-4xl font-bold text-blue-900 text-center mb-8">
-        User Data
+        User Data{" "}
       </h1>
+      <p className="text-red-500 absolute text-2xl font-bold right-2 top-6 ">
+        users found 🚀 :{data.length}
+      </p>
 
       <div className="flex justify-center flex-wrap gap-6">
         {data.map((user) => (
