@@ -18,9 +18,13 @@ h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
 }
+
 h2 span {
   color: #007bff;
   font-size: 3rem;
+}
+h2 span ::first-letter {
+  text-transform: uppercase;
 }
 
 input,
