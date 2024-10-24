@@ -43,13 +43,14 @@ function AccountOperations() {
 
   return (
     <div>
-      <h2>Your account operations</h2>
+      <h2>Your account operations :</h2>
       <div className="inputs">
         <div>
           <label>Deposit</label>
           <input
             type="number"
             value={depositAmount}
+            placeholder="Deposit amount"
             onChange={(e) => setDepositAmount(+e.target.value)}
           />
           {/* <select
@@ -69,6 +70,7 @@ function AccountOperations() {
           <input
             type="number"
             value={withdrawalAmount}
+            placeholder="Withdrawal amount"
             onChange={(e) => setWithdrawalAmount(+e.target.value)}
           />
           <button onClick={handleWithdrawal}>
@@ -76,7 +78,7 @@ function AccountOperations() {
           </button>
         </div>
 
-        <div>
+        <div className="requestInput">
           <label>Request loan</label>
           <input
             type="number"

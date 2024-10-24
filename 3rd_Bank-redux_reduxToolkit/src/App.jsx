@@ -8,18 +8,20 @@ function App() {
   const fullName = useSelector((state) => state.customer.fullName);
 
   return (
-    <div>
-      <h1>🏦 The React-Redux Bank ⚛️</h1>
-      {fullName === "" ? (
-        <CreateCustomer />
-      ) : (
-        <>
-          <Customer />
-          <AccountOperations />
-          <BalanceDisplay />
-        </>
-      )}
-    </div>
+    <>
+      <h1>🏦 The Real Bank Indosa 🦹🏻‍♂️</h1>
+      <div>
+        {fullName === "" ? (
+          <CreateCustomer />
+        ) : (
+          <>
+            <Customer />
+            <AccountOperations />
+            <BalanceDisplay />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
