@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deposit, withdraw, requestLoan, payLoan } from "./accountSlice";
+import { toast } from "react-toastify";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState("");
@@ -22,12 +23,14 @@ function AccountOperations() {
     dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
     setCurrency("USD");
+    toast.success(`Deposit successful ${depositAmount}`);
   }
 
   function handleWithdrawal() {
     if (!withdrawalAmount) return;
     dispatch(withdraw(withdrawalAmount));
     setWithdrawalAmount("");
+    toast.error(`Withdrawal successful ${withdrawalAmount}`);
   }
 
   function handleRequestLoan() {
@@ -35,10 +38,12 @@ function AccountOperations() {
     dispatch(requestLoan(loanAmount, loanPurpose));
     setLoanAmount("");
     setLoanPurpose("");
+    toast.success(`Loan request successful ${loanAmount}`);
   }
 
   function handlePayLoan() {
     dispatch(payLoan());
+    toast(`Loan payment successful ${currentLoan}`);
   }
 
   return (

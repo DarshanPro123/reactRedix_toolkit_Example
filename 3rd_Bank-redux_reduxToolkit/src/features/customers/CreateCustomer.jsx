@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createCustomer } from "./customerSlice";
+import { toast } from "react-toastify";
 
 function Customer() {
   const [fullName, setFullName] = useState("");
@@ -11,6 +12,7 @@ function Customer() {
   function handleClick() {
     if (!fullName || !nationalId) return;
     dispatch(createCustomer(fullName, nationalId));
+    toast.success("Customer created successfully");
   }
 
   return (
@@ -27,6 +29,7 @@ function Customer() {
           <label>Customer full name</label>
           <input
             value={fullName}
+            placeholder="Full name"
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
@@ -34,6 +37,7 @@ function Customer() {
           <label>National ID</label>
           <input
             value={nationalId}
+            placeholder="National ID"
             onChange={(e) => setNationalId(e.target.value)}
           />
         </div>
