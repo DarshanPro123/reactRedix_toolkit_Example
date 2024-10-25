@@ -36,7 +36,7 @@ const MainCard = () => {
     });
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -44,7 +44,6 @@ const MainCard = () => {
       {nextLoading ? (
         <div className="w-full h-svh flex flex-col justify-center items-center p-12 gap-4">
           <Spinner />
-          {/* <div className="text-6xl text-blue-500">Wait..😏😏😏</div> */}
         </div>
       ) : (
         <Pokemons pokemons={pokemons} />
