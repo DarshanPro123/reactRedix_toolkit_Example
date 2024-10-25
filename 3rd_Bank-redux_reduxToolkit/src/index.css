@@ -10,6 +10,10 @@ h1 {
   margin-bottom: 40px;
 }
 
+h1 span {
+  color: #f00;
+}
+
 h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -32,7 +36,7 @@ button {
 .inputs {
   background-color: #f7f7f7;
   padding: 32px;
-  width: 60%;
+  width: 80%;
   height: auto;
   margin: 0 auto;
   display: flex;
