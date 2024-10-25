@@ -20,7 +20,7 @@ const MainCard = () => {
   const handleNext = () => {
     setNextLoading(true); // Set loading to true
     dispatch(fetchNextPokemonData()).finally(() => {
-      // After fetching, reset loading after 2 seconds
+      // After fetching, reset loading after 1 seconds
       setTimeout(() => {
         setNextLoading(false);
       }, 1000);
@@ -28,7 +28,12 @@ const MainCard = () => {
   };
 
   const handlePrevious = () => {
-    dispatch(fetchPreviousPokemonData());
+    setNextLoading(true); // Set loading to true
+    dispatch(fetchPreviousPokemonData()).finally(() => {
+      setTimeout(() => {
+        setNextLoading(false);
+      }, 800);
+    });
   };
 
   if (loading) return <div>Loading...</div>;
@@ -39,7 +44,7 @@ const MainCard = () => {
       {nextLoading ? (
         <div className="w-full h-svh flex flex-col justify-center items-center p-12 gap-4">
           <Spinner />
-          <div className="text-6xl text-blue-500">Loading...</div>
+          {/* <div className="text-6xl text-blue-500">Wait..😏😏😏</div> */}
         </div>
       ) : (
         <Pokemons pokemons={pokemons} />
