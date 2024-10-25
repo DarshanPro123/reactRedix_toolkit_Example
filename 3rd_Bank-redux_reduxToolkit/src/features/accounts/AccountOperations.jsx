@@ -18,7 +18,8 @@ function AccountOperations() {
     balance,
   } = useSelector((state) => state.account);
 
-  function handleDeposit() {
+  function handleDeposit(e) {
+    e.preventDefault();
     if (!depositAmount) return;
     dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
@@ -26,14 +27,20 @@ function AccountOperations() {
     toast.success(`Deposit successful ${depositAmount}`);
   }
 
-  function handleWithdrawal() {
+  function handleWithdrawal(e) {
+    e.preventDefault();
     if (!withdrawalAmount) return;
+    if (balance < withdrawalAmount) {
+      toast.error("Insufficient funds");
+      return;
+    }
     dispatch(withdraw(withdrawalAmount));
     setWithdrawalAmount("");
     toast.error(`Withdrawal successful ${withdrawalAmount}`);
   }
 
-  function handleRequestLoan() {
+  function handleRequestLoan(e) {
+    e.preventDefault();
     if (!loanAmount || !loanPurpose) return;
     dispatch(requestLoan(loanAmount, loanPurpose));
     setLoanAmount("");
@@ -50,7 +57,7 @@ function AccountOperations() {
     <div>
       <h2>Your account operations :</h2>
       <div className="inputs">
-        <div>
+        <form onSubmit={handleDeposit}>
           <label>Deposit</label>
           <input
             type="number"
@@ -58,19 +65,11 @@ function AccountOperations() {
             placeholder="Deposit amount"
             onChange={(e) => setDepositAmount(+e.target.value)}
           />
-          {/* <select
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-          >
-            <option value="USD">US Dollar</option>
-            <option value="EUR">Euro</option>
-            <option value="GBP">British Pound</option>
-          </select> */}
 
           <button onClick={handleDeposit}>Deposit {depositAmount}</button>
-        </div>
+        </form>
 
-        <div>
+        <form onSubmit={handleWithdrawal}>
           <label>Withdraw</label>
           <input
             type="number"
@@ -81,9 +80,9 @@ function AccountOperations() {
           <button onClick={handleWithdrawal}>
             Withdraw {withdrawalAmount}
           </button>
-        </div>
+        </form>
 
-        <div className="requestInput">
+        <form onSubmit={handleRequestLoan} className="requestInput">
           <label>Request loan</label>
           <input
             type="number"
@@ -97,17 +96,30 @@ function AccountOperations() {
             placeholder="Loan purpose"
           />
           <button onClick={handleRequestLoan}>Get loan</button>
-        </div>
+        </form>
 
-        <div>
-          <span>
-            Pay back ${currentLoan}({currentLoanPurpose})
-          </span>
-          <button onClick={handlePayLoan}>Pay loan</button>
-        </div>
+        {currentLoan > 0 && (
+          <div>
+            <span>
+              Pay back ${currentLoan}({currentLoanPurpose})
+            </span>
+            <button onClick={handlePayLoan}>Pay loan</button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export default AccountOperations;
+
+{
+  /* <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="USD">US Dollar</option>
+            <option value="EUR">Euro</option>
+            <option value="GBP">British Pound</option>
+          </select> */
+}

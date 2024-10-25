@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const accountSlice = createSlice({
-  name: "   ",
+  name: "account",
   initialState,
   reducers: {
     deposit(state, action) {
