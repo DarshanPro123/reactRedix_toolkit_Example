@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllPokemonData,
@@ -6,19 +6,25 @@ import {
   fetchPreviousPokemonData,
 } from "../features/PokemonCardSlice";
 import Pokemons from "./Pokemons.jsx";
+import Spinner from "./Spinner.jsx";
 
 const MainCard = () => {
   const dispatch = useDispatch();
   const { pokemons, loading, error } = useSelector((state) => state.pokemon);
+  const [nextLoading, setNextLoading] = useState(false);
 
   useEffect(() => {
-    // fetch all Pokémon after  2 seconds
-
     dispatch(fetchAllPokemonData());
   }, [dispatch]);
 
   const handleNext = () => {
-    dispatch(fetchNextPokemonData());
+    setNextLoading(true); // Set loading to true
+    dispatch(fetchNextPokemonData()).finally(() => {
+      // After fetching, reset loading after 2 seconds
+      setTimeout(() => {
+        setNextLoading(false);
+      }, 1000);
+    });
   };
 
   const handlePrevious = () => {
@@ -30,20 +36,27 @@ const MainCard = () => {
 
   return (
     <div className="flex flex-col ">
-      <Pokemons pokemons={pokemons} />
+      {nextLoading ? (
+        <div className="w-full h-svh flex flex-col justify-center items-center p-12 gap-4">
+          <Spinner />
+          <div className="text-6xl text-blue-500">Loading...</div>
+        </div>
+      ) : (
+        <Pokemons pokemons={pokemons} />
+      )}
 
-      <div className="w-full flex justify-between  items-center p-12 gap-4">
+      <div className="w-full flex justify-between items-center p-12 gap-4">
         <button
           onClick={handlePrevious}
-          className=" w-[128px] bg-blue-500 hover:bg-blue-700 text-white border rounded px-4 py-2 "
+          className="w-[128px] bg-blue-500 hover:bg-blue-700 text-white border rounded px-4 py-2"
         >
           Previous
         </button>
         <button
           onClick={handleNext}
-          className="w-[128px] bg-blue-500 hover:bg-blue-700 text-white border rounded px-4 py-2 "
+          className="w-[128px] bg-blue-500 hover:bg-blue-700 text-white border rounded px-4 py-2"
         >
-          Next
+          {nextLoading ? "Loading..." : "Next"}
         </button>
       </div>
     </div>
