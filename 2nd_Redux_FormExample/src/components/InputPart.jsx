@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 const InputPart = ({
   name,
@@ -35,21 +36,19 @@ const InputPart = ({
             value: maxLength,
             message: `${label} must not exceed ${maxLength} characters`,
           },
-          validate: (value) => {
-            if (type === "email") {
-              return (
-                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value) ||
-                "Invalid email format"
-              );
-            }
-            if (type === "password") {
-              return (
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value) ||
-                "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number"
-              );
-            }
-            return true;
-          },
+          pattern:
+            type === "email"
+              ? {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email address",
+                }
+              : type === "password"
+              ? {
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/,
+                  message:
+                    "Password must contain at least 6 characters, including UPPER/lowercase and numbers",
+                }
+              : undefined,
         })}
         type={type}
         placeholder={placeholder}
@@ -58,9 +57,13 @@ const InputPart = ({
           errors[name] ? "border border-red-500" : ""
         }`}
       />
-      {errors[name] && (
-        <span className="text-red-500">{errors[name]?.message}</span>
-      )}
+      <ErrorMessage
+        name={name}
+        errors={errors}
+        render={({ message }) => (
+          <span className="text-red-500">{message}</span>
+        )}
+      />
     </>
   );
 };

@@ -52,7 +52,6 @@ const Form = () => {
           type="email"
           label="Email"
           maxLength={30}
-          lableClass={"text-gray-800 text-xl"}
           inputClass={"p-2 h-14 bg-gray-700 rounded-sm"}
           placeholder="Enter Email"
         />
@@ -64,7 +63,6 @@ const Form = () => {
               label="Password"
               minLength={6}
               maxLength={15}
-              lableClass={"text-gray-800 text-xl"}
               inputClass={"p-2 w-full mr-2 h-14 bg-gray-700 rounded-sm"}
               placeholder="Enter Password"
             />
