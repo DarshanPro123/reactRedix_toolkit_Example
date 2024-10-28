@@ -1,11 +1,11 @@
 import React from "react";
 
-const UserCard = ({ entry }) => {
+const UserCard = ({ entry, handleDelete }) => {
   return (
-    <div
-      key={entry.name}
-      className="text-gray-200 mb-4 border-b border-gray-500 py-2"
-    >
+    <div className="relative text-gray-200 mb-4 border-b border-gray-500 py-2">
+      <span className="absolute right-0 cursor-pointer" onClick={handleDelete}>
+        ❌
+      </span>
       <p>
         <strong>Name:</strong> {entry.name}
       </p>

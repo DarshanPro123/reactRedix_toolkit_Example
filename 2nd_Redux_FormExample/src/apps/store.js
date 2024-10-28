@@ -19,11 +19,17 @@ const formSlice = createSlice({
       state.entries.push(action.payload); // Append new entry
       localStorage.setItem("formData", JSON.stringify(state.entries)); // Save to local storage
     },
+    deleteData: (state, action) => {
+      state.entries = state.entries.filter(
+        (entry) => entry.id !== action.payload
+      );
+      localStorage.setItem("formData", JSON.stringify(state.entries));
+    },
   },
 });
 
 // Export the action creator for setting form data
-export const { setFormData } = formSlice.actions;
+export const { setFormData, deleteData } = formSlice.actions;
 
 // Configure the Redux store
 const store = configureStore({

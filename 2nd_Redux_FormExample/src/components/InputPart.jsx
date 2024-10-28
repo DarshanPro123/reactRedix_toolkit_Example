@@ -10,6 +10,8 @@ const InputPart = ({
   inputClass,
   minLength,
   maxLength,
+  important,
+  value,
 }) => {
   const {
     register,
@@ -18,7 +20,10 @@ const InputPart = ({
 
   return (
     <>
-      <label className={lableClass}>{label}</label>
+      <label className={lableClass}>
+        {label}
+        <span className="text-red-600">{important}</span>
+      </label>
       <input
         {...register(name, {
           required: `${label} is required`,
@@ -33,6 +38,7 @@ const InputPart = ({
         })}
         type={type}
         placeholder={placeholder}
+        value={value}
         className={`${inputClass} ${
           errors[name] ? "border border-red-500" : ""
         }`}
