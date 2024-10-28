@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { setFormData } from "../apps/store";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import InputPart from "./InputPart";
+import GenderInput from "./GenderInput";
 
 const Form = () => {
   const methods = useForm();
@@ -57,7 +58,6 @@ const Form = () => {
           inputClass={"p-2 h-14 bg-gray-700 rounded-lg"}
           placeholder="Enter Email"
         />
-
         <div className="relative flex justify-between items-center">
           <InputPart
             name="password"
@@ -77,7 +77,6 @@ const Form = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>
-
         <label className="text-gray-800 text-xl">Select Date Of Birth:</label>
         <Controller
           name="birthDate"
@@ -100,39 +99,16 @@ const Form = () => {
           <span className="text-red-500">
             {methods.formState.errors.birthDate.message}
           </span>
-        )}
-
-        <label className="text-gray-800 text-xl">Gender:</label>
-        <div className="flex h-14 gap-6 bg-gray-700 p-2 rounded-lg w-full">
-          <InputPart
-            name="gendar"
-            type="radio"
-            label="Male"
-            value="male"
-            lableClass="text-gray-50 text-xl"
-            inputClass="mr-2"
-            required={false}
-          />
-          <InputPart
-            name="gendar"
-            type="radio"
-            label="Female"
-            value="female"
-            lableClass="text-gray-50 text-xl"
-            inputClass="mr-2"
-            required={false}
-          />
-        </div>
-        {methods.formState.errors.gender && (
-          <span className="text-red-500">
-            {methods.formState.errors.gender.message}
-          </span>
-        )}
-
+        )}{" "}
+        <GenderInput />
         <input
           type="submit"
           value="Submit"
-          className="w-full border h-14 border-gray-700 bg-orange-400 hover:bg-orange-700 cursor-pointer text-gray-50 px-4 py-2 rounded-xl transition duration-200"
+          className="w-full border
+           h-14 border-gray-700
+            bg-orange-400 hover:bg-orange-700
+             cursor-pointer text-gray-50 px-4 py-2 
+             rounded-xl transition duration-200"
         />
       </form>
     </FormProvider>
@@ -140,41 +116,3 @@ const Form = () => {
 };
 
 export default Form;
-
-{
-  /* <label className="text-gray-800 text-xl" htmlFor="">
-          Gendar:
-        </label>
-        <div className="flex h-14 gap-6 bg-gray-700 p-2 rounded-lg w-full">
-          <label htmlFor="field-male" className="flex text-xl items-center">
-            <input
-              {...register("gender", { required: "Gender is required" })}
-              type="radio"
-              value="male"
-              id="field-male"
-              className="mr-3"
-            />
-            Male
-          </label>
-
-          <label htmlFor="field-female" className="flex text-xl items-center">
-            <input
-              {...register("gender")}
-              type="radio"
-              value="female"
-              id="field-female"
-              className="mr-3"
-            />
-            Female
-          </label>
-        </div>
-        {errors.gender && (
-          <span className="text-red-500">{errors.gender.message}</span>
-        )} */
-}
-
-{
-  /* {errors.password && (
-          <span className="text-red-500">{errors.password.message}</span>
-        )} */
-}

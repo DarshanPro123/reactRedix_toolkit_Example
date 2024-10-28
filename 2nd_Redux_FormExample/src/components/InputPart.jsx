@@ -10,7 +10,6 @@ const InputPart = ({
   inputClass,
   minLength,
   maxLength,
-  important,
   value,
   required = true, // Default to true
 }) => {
