@@ -78,7 +78,7 @@ const Form = () => {
           </span>
         </div>
 
-        <label className="text-gray-800 text-xl">Select Date Of Birth: *</label>
+        <label className="text-gray-800 text-xl">Select Date Of Birth:</label>
         <Controller
           name="birthDate"
           control={methods.control}
@@ -102,23 +102,25 @@ const Form = () => {
           </span>
         )}
 
-        <label className="text-gray-800 text-xl">Gender: *</label>
+        <label className="text-gray-800 text-xl">Gender:</label>
         <div className="flex h-14 gap-6 bg-gray-700 p-2 rounded-lg w-full">
           <InputPart
-            name="gender"
+            name="gendar"
             type="radio"
             label="Male"
             value="male"
             lableClass="text-gray-50 text-xl"
             inputClass="mr-2"
+            required={false}
           />
           <InputPart
-            name="gender"
+            name="gendar"
             type="radio"
             label="Female"
             value="female"
             lableClass="text-gray-50 text-xl"
             inputClass="mr-2"
+            required={false}
           />
         </div>
         {methods.formState.errors.gender && (

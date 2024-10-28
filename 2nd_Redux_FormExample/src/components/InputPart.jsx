@@ -12,6 +12,7 @@ const InputPart = ({
   maxLength,
   important,
   value,
+  required = true, // Default to true
 }) => {
   const {
     register,
@@ -22,11 +23,11 @@ const InputPart = ({
     <>
       <label className={lableClass}>
         {label}
-        <span className="text-red-600">{important}</span>
+        {required && <span className="text-red-600">*</span>}
       </label>
       <input
         {...register(name, {
-          required: `${label} is required`,
+          required: required ? `${label} is required` : false, // Apply required conditionally
           minLength: minLength && {
             value: minLength,
             message: `${label} must be at least ${minLength} characters`,
