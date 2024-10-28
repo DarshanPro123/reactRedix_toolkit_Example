@@ -9,7 +9,9 @@ const GenderInput = () => {
 
   return (
     <div>
-      <label className="text-gray-800 text-xl">Gender:</label>
+      <label className="text-gray-800 text-xl">
+        Gender<span className="text-red-500">*</span>
+      </label>
       <div className="flex h-14 gap-6 bg-gray-700 p-2 rounded-lg w-full">
         <label htmlFor="field-male" className="flex text-xl items-center">
           <input

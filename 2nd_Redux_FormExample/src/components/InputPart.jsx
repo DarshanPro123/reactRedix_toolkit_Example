@@ -35,6 +35,21 @@ const InputPart = ({
             value: maxLength,
             message: `${label} must not exceed ${maxLength} characters`,
           },
+          validate: (value) => {
+            if (type === "email") {
+              return (
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value) ||
+                "Invalid email format"
+              );
+            }
+            if (type === "password") {
+              return (
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value) ||
+                "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number"
+              );
+            }
+            return true;
+          },
         })}
         type={type}
         placeholder={placeholder}

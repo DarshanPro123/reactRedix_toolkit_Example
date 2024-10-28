@@ -32,7 +32,7 @@ const Form = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(handleData)}
-        className="flex w-11/12 md:w-6/12 min-[340px]:p-3  gap-8 flex-col shadow-xl p-10 rounded-lg"
+        className="flex w-11/12 md:w-6/12 min-[340px]:p-3  gap-8 flex-col shadow-md hover:shadow-lg p-10 rounded-lg"
       >
         <h1 className="text-4xl font-bold text-blue-900 text-center mb-4">
           User Registration Form
@@ -41,37 +41,36 @@ const Form = () => {
           name="name"
           type="text"
           label="Name"
-          important={"*"}
           minLength={3}
           maxLength={20}
           lableClass={"text-gray-800 text-xl"}
-          inputClass={"p-2 h-14 bg-gray-700 rounded-lg"}
+          inputClass={"p-2 h-14 bg-gray-700 rounded-md"}
           placeholder="Enter Name"
         />
         <InputPart
           name="email"
           type="email"
           label="Email"
-          important={"*"}
           maxLength={30}
           lableClass={"text-gray-800 text-xl"}
-          inputClass={"p-2 h-14 bg-gray-700 rounded-lg"}
+          inputClass={"p-2 h-14 bg-gray-700 rounded-sm"}
           placeholder="Enter Email"
         />
-        <div className="relative flex justify-between items-center">
-          <InputPart
-            name="password"
-            type={showPassword ? "text" : "password"}
-            label="Password"
-            minLength={6}
-            maxLength={15}
-            important={"*"}
-            lableClass={"text-gray-800 text-xl"}
-            inputClass={"p-2 h-14 bg-gray-700 rounded-lg"}
-            placeholder="Enter Password"
-          />
+        <div className="relative  flex  items-center">
+          <div className="flex-grow">
+            <InputPart
+              name="password"
+              type={showPassword ? "text" : "password"}
+              label="Password"
+              minLength={6}
+              maxLength={15}
+              lableClass={"text-gray-800 text-xl"}
+              inputClass={"p-2 w-full mr-2 h-14 bg-gray-700 rounded-sm"}
+              placeholder="Enter Password"
+            />
+          </div>
           <span
-            className="field-icon text-3xl text-gray-800 cursor-pointer"
+            className="field-icon text-3xl  text-gray-800 cursor-pointer"
             onClick={handleShowPassword}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -88,10 +87,17 @@ const Form = () => {
               onChange={onChange}
               onBlur={onBlur}
               maxDate={new Date()}
-              className="p-2 h-14 bg-gray-700 rounded-lg"
-              dateFormat="MMMM d, yyyy"
+              className="p-2 h-14 bg-gray-700 rounded-sm"
+              dateFormat="dd/MMMM/yyyy"
               placeholderText="Select a birth date"
               isClearable
+              // inline
+              showYearDropdown
+              showMonthDropdown
+              scrollableMonthYearDropdown
+              monthDropDownItemNumber={12}
+              yearDropdownItemNumber={30}
+              scrollableYearDropdown
             />
           )}
         />
